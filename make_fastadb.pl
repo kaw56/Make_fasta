@@ -3,9 +3,6 @@
 use warnings;
 use strict;
 
-use Bio::SeqIO;
-use Bio::Tools::Run::StandAloneBlastPlus;
-
 # make sure that this is just a little reusable..
 
 die "usage: make_fastadb.pl <sequence file> <annotation file>" unless (@ARGV == 2);
@@ -15,8 +12,7 @@ my $anno_filename   = shift;
 
 open(my $seq_file, "<", $seq_filename) or die "can't open file $seq_filename, $!";
 
-# read it into an array
-
+# read sequence into an array
 my @seq;
 
 while (my $line = <$seq_file>) {
@@ -29,13 +25,9 @@ while (my $line = <$seq_file>) {
 }
 
 # make the array a string
-
 my $genome = join( "", @seq);
 
-# this is just to test that my sequence is fine
-
-
-
+print "$genome\n";
 
 # take the sequence annotation file I made and make it a hash? 
 
