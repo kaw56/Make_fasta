@@ -28,10 +28,28 @@ while (my $line = <$seq_file>) {
 # make the array a string
 my $genome = join( "", @seq);
 
+# take the sequence annotation file and make it a hash
 
+open (my $anno_file, '<', $anno_filename) or die "Can't open $anno_filename, $!";
 
+my %annotation_for  = ();
 
-# take the sequence annotation file I made and make it a hash? 
+# read in annotation file line by line...
+while (my $line = <$anno_file>) {
+    
+    # split line on space into an array...
+    my @gene_information = split(" ", $line);
+    
+    # take the gene name as the key for the hash...
+    my $gene_name = shift @gene_information;
+    
+    # reference to the 2 position values...   
+    my $positions_ref = \@gene_information;
+    
+    # put into the hash...     
+    $annotation_for{$gene_name} = $positions_ref;
+    
+}
 
 # open an output file
 
