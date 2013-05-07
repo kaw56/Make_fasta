@@ -61,9 +61,9 @@ open (my $fasta_db, '>', $fasta_db_name) or die "Can't open $fasta_db_name, $!";
 # loop through the keys to my annotation hash 
 foreach my $gene (keys %annotation_for) {
     
-    # find the gene length
+    # find the gene length (plus one because nucleotide counts are inclusive
     my $gene_length = abs(${$annotation_for{$gene}}[0] 
-                            - ${$annotation_for{$gene}}[1]);
+                            - ${$annotation_for{$gene}}[1]) + 1;
     
     # print identifier line to output
     print $fasta_db ">name = $gene length = $gene_length\n";
