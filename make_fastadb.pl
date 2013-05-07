@@ -9,6 +9,7 @@ die "usage: make_fastadb.pl <sequence file> <annotation file>" unless (@ARGV == 
 
 my $seq_filename    = shift;
 my $anno_filename   = shift;
+my $fasta_db_name   = $seq_filename . "_db.fa";
 
 open(my $seq_file, "<", $seq_filename) or die "can't open file $seq_filename, $!";
 
@@ -25,11 +26,13 @@ while (my $line = <$seq_file>) {
     } 
 }
 
+close($seq_file);
+
 # make the array a string
 my $genome = join( "", @seq);
 
-# take the sequence annotation file and make it a hash
 
+# take the sequence annotation file and make it a hash
 open (my $anno_file, '<', $anno_filename) or die "Can't open $anno_filename, $!";
 
 my %annotation_for  = ();
@@ -51,7 +54,10 @@ while (my $line = <$anno_file>) {
     
 }
 
+close($anno_file);
+
 # open an output file
+open (my $fasta_db, '>', $fasta_db_name) or die "Can't open $fasta_db_name, $!";
 
 # for each annotation
 #   write "> <the name of the gene> <gene length>"
