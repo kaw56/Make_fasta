@@ -66,7 +66,7 @@ foreach my $gene (keys %annotation_for) {
                             - ${$annotation_for{$gene}}[1]) + 1;
     
     # print identifier line to output
-    print $fasta_db ">name = $gene length = $gene_length\n";
+    print $fasta_db ">$gene length = $gene_length\n";
     
     # make new variables for the sequence coordinates and 
     # subtract 1 to account for counting from 0
